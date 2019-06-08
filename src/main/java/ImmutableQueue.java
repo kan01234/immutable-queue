@@ -24,7 +24,7 @@ public final class ImmutableQueue<T> implements Queue<T> {
   }
 
   public boolean isEmpty() {
-    return stack == null;
+    return stack.isEmpty();
   }
 
   private final Stack<T> reserveStack(Stack<T> stack) {
