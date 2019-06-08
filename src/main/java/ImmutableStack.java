@@ -20,7 +20,7 @@ public final class ImmutableStack<T> implements Stack<T> {
   }
 
   public boolean isEmpty() {
-    return head == null;
+    return head == null && stack == null;
   }
 
   public final Stack<T> push(T t) {
