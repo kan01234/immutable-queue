@@ -1,30 +1,43 @@
-
 public final class ImmutableQueue<T> implements Queue<T> {
 
-  private final Stack<T> stack;
+  private final Stack<T> order;
+
+  private final Stack<T> reserve;
 
   public ImmutableQueue() {
-    stack = new ImmutableStack<T>();
+    order = new ImmutableStack<T>();
+    reserve = new ImmutableStack<T>();
   }
 
-  public ImmutableQueue(Stack<T> stack) {
-    this.stack = stack;
+  public ImmutableQueue(Stack<T> order, Stack<T> reserve) {
+    this.order = order;
+    this.reserve = reserve;
   }
 
   public Queue<T> enQueue(T t) {
-    return new ImmutableQueue<T>(stack.push(t));
+    return new ImmutableQueue<T>(order, reserve.push(t));
   }
 
   public Queue<T> deQueue() {
-    return new ImmutableQueue<T>(reserveStack(reserveStack(stack).pop()));
+    if (this.isEmpty())
+      return new ImmutableQueue<T>();
+    if (!order.isEmpty())
+      return new ImmutableQueue<T>(order.pop(), reserve);
+    else
+      return new ImmutableQueue<T>(reserveStack(reserve), new ImmutableStack<T>()).deQueue();
   }
 
   public T head() {
-    return (T) reserveStack(stack).head();
+    if (this.isEmpty())
+      return null;
+    if (order.isEmpty())
+      return reserveStack(reserve).head();
+    else
+      return order.head();
   }
 
   public boolean isEmpty() {
-    return stack.isEmpty();
+    return order.isEmpty() && reserve.isEmpty();
   }
 
   private final Stack<T> reserveStack(Stack<T> stack) {
