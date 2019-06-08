@@ -1,24 +1,34 @@
 
-public class ImmutableStack<T> implements Stack<T> {
+public final class ImmutableStack<T> implements Stack<T> {
+
+  private final T head;
+
+  private final Stack<T> stack;
+
+  public ImmutableStack() {
+    head = null;
+    stack = null;
+  }
+
+  public ImmutableStack(T head, Stack<T> stack) {
+    this.head = head;
+    this.stack = stack;
+  }
 
   public T head() {
-    // TODO Auto-generated method stub
-    return null;
+    return head;
   }
 
   public boolean isEmpty() {
-    // TODO Auto-generated method stub
-    return false;
+    return head == null;
   }
 
-  public Stack<T> push(T t) {
-    // TODO Auto-generated method stub
-    return null;
+  public final Stack<T> push(T t) {
+    return new ImmutableStack<T>(t, this);
   }
 
-  public Stack<T> pop() {
-    // TODO Auto-generated method stub
-    return null;
+  public final Stack<T> pop() {
+    return stack;
   }
 
 }
