@@ -1,3 +1,4 @@
+package com.kan01234;
 
 public final class ImmutableStack<T> implements Stack<T> {
 

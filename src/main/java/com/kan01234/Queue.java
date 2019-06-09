@@ -1,3 +1,4 @@
+package com.kan01234;
 public interface Queue<T> {
 
   public Queue<T> enQueue(T t);

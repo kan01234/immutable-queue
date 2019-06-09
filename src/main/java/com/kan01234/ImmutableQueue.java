@@ -1,3 +1,4 @@
+package com.kan01234;
 public final class ImmutableQueue<T> implements Queue<T> {
 
   private final Stack<T> order;
