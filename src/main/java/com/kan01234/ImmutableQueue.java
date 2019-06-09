@@ -5,11 +5,6 @@ public final class ImmutableQueue<T> implements Queue<T> {
 
   private final Stack<T> reserve;
 
-  public ImmutableQueue() {
-    order = new ImmutableStack<T>();
-    reserve = new ImmutableStack<T>();
-  }
-
   public ImmutableQueue(Stack<T> order, Stack<T> reserve) {
     this.order = order;
     this.reserve = reserve;
@@ -26,12 +21,14 @@ public final class ImmutableQueue<T> implements Queue<T> {
     else if (reserve.isEmpty())
       return getEmptyInstance();
     else
-      return new ImmutableQueue<T>(reserveStack(reserve).pop(), new ImmutableStack<T>());
+      return new ImmutableQueue<T>(reserveStack(reserve).pop(), ImmutableStack.getEmptyInstance());
   }
 
   public T head() {
+    if (isEmpty())
+      return null;
     if (order.isEmpty())
-      return reserveStack(reserve).head();
+      return (T) reserveStack(reserve).head();
     else
       return order.head();
   }
@@ -44,8 +41,8 @@ public final class ImmutableQueue<T> implements Queue<T> {
     return EmptyInstance.getInstance();
   }
 
-  private final Stack<T> reserveStack(Stack<T> stack) {
-    Stack<T> reserveStack = new ImmutableStack<T>();
+  private final static Stack reserveStack(Stack stack) {
+    Stack reserveStack = ImmutableStack.getEmptyInstance();
     while (!stack.isEmpty()) {
       reserveStack = reserveStack.push(stack.head());
       stack = stack.pop();
@@ -62,10 +59,9 @@ public final class ImmutableQueue<T> implements Queue<T> {
     }
 
     public Queue<T> enQueue(T t) {
-      return new ImmutableQueue<T>(new ImmutableStack<T>().push(t), new ImmutableStack<T>());
+      return new ImmutableQueue<T>(ImmutableStack.getEmptyInstance().push(t), ImmutableStack.getEmptyInstance());
     }
 
-    @SuppressWarnings("unchecked")
     public Queue<T> deQueue() {
       return emptyInstance;
     }
