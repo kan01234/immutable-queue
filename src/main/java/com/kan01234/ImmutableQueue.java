@@ -1,4 +1,5 @@
 package com.kan01234;
+
 public final class ImmutableQueue<T> implements Queue<T> {
 
   private final Stack<T> order;
@@ -15,13 +16,13 @@ public final class ImmutableQueue<T> implements Queue<T> {
   }
 
   public Queue<T> deQueue() {
+    if (order.isEmpty())
+      return new ImmutableQueue<T>(reserveStack(reserve).pop(), ImmutableStack.getEmptyInstance());
     Stack<T> o = order.pop();
-    if (!o.isEmpty())
-      return new ImmutableQueue<T>(o, reserve);
-    else if (reserve.isEmpty())
+    if (o.isEmpty() && reserve.isEmpty())
       return getEmptyInstance();
     else
-      return new ImmutableQueue<T>(reserveStack(reserve).pop(), ImmutableStack.getEmptyInstance());
+      return new ImmutableQueue<T>(o, reserve);
   }
 
   public T head() {
@@ -59,7 +60,8 @@ public final class ImmutableQueue<T> implements Queue<T> {
     }
 
     public Queue<T> enQueue(T t) {
-      return new ImmutableQueue<T>(ImmutableStack.getEmptyInstance().push(t), ImmutableStack.getEmptyInstance());
+      return new ImmutableQueue<T>(ImmutableStack.getEmptyInstance().push(t),
+          ImmutableStack.getEmptyInstance());
     }
 
     public Queue<T> deQueue() {
