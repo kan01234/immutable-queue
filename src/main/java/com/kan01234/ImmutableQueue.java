@@ -17,7 +17,7 @@ public final class ImmutableQueue<T> implements Queue<T> {
 
   public Queue<T> deQueue() {
     if (order.isEmpty())
-      return new ImmutableQueue<T>(reserveStack(reserve).pop(), ImmutableStack.getEmptyInstance());
+      return new ImmutableQueue<T>(reserveStack(reserve), ImmutableStack.getEmptyInstance()).deQueue();
     Stack<T> o = order.pop();
     if (o.isEmpty() && reserve.isEmpty())
       return getEmptyInstance();

@@ -30,6 +30,26 @@ public class TestCase {
     assertEquals(s.head(), null);
     assertEquals(s.isEmpty(), true);
     assertEquals(s.pop(), ImmutableStack.getEmptyInstance());
+    s = s.push("4");
+    s = s.push("5");
+    assertEquals(s.head(), "5");
+    assertEquals(s.isEmpty(), false);
+    assertNotEquals(s, ImmutableStack.getEmptyInstance());
+    s = s.pop();
+    assertEquals(s.head(), "4");
+    assertEquals(s.isEmpty(), false);
+    assertNotEquals(s, ImmutableStack.getEmptyInstance());
+    s = s.pop();
+    assertEquals(s.head(), null);
+    assertEquals(s.isEmpty(), true);
+    assertEquals(s.pop(), ImmutableStack.getEmptyInstance());
+    s = s.push("6");
+    s = s.push("7");
+    s = s.pop();
+    s = s.pop();
+    assertEquals(s.head(), null);
+    assertEquals(s.isEmpty(), true);
+    assertEquals(s.pop(), ImmutableStack.getEmptyInstance());
   }
 
   @Test
@@ -52,6 +72,26 @@ public class TestCase {
     assertEquals(q.isEmpty(), false);
     assertEquals(q.head(), "3");
     assertNotEquals(q, ImmutableQueue.getEmptyInstance());
+    q = q.deQueue();
+    assertEquals(q.isEmpty(), true);
+    assertEquals(q.head(), null);
+    assertEquals(q, ImmutableQueue.getEmptyInstance());
+    q = q.enQueue("4");
+    q = q.enQueue("5");
+    assertEquals(q.isEmpty(), false);
+    assertEquals(q.head(), "4");
+    assertNotEquals(q, ImmutableQueue.getEmptyInstance());
+    q = q.deQueue();
+    assertEquals(q.isEmpty(), false);
+    assertEquals(q.head(), "5");
+    assertNotEquals(q, ImmutableQueue.getEmptyInstance());
+    q = q.deQueue();
+    assertEquals(q.isEmpty(), true);
+    assertEquals(q.head(), null);
+    assertEquals(q, ImmutableQueue.getEmptyInstance());
+    q = q.enQueue("6");
+    q = q.enQueue("7");
+    q = q.deQueue();
     q = q.deQueue();
     assertEquals(q.isEmpty(), true);
     assertEquals(q.head(), null);
