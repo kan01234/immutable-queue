@@ -35,7 +35,6 @@ public final class ImmutableStack<T> implements Stack<T> {
 
     private static final EmptyInstance emptyInstance = new EmptyInstance();
 
-    @SuppressWarnings("rawtypes")
     public static final EmptyInstance getInstance() {
       return emptyInstance;
     }
