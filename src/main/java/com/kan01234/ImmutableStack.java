@@ -27,16 +27,16 @@ public final class ImmutableStack<T> implements Stack<T> {
     return stack;
   }
 
-  public final static Stack getEmptyInstance() {
+  public static final Stack getEmptyInstance() {
     return EmptyInstance.getInstance();
   }
 
-  private final static class EmptyInstance<T> implements Stack<T> {
+  private static final class EmptyInstance<T> implements Stack<T> {
 
-    private final static EmptyInstance emptyInstance = new EmptyInstance();
+    private static final EmptyInstance emptyInstance = new EmptyInstance();
 
     @SuppressWarnings("rawtypes")
-    public final static EmptyInstance getInstance() {
+    public static final EmptyInstance getInstance() {
       return emptyInstance;
     }
 

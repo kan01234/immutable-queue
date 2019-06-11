@@ -41,11 +41,11 @@ public final class ImmutableQueue<T> implements Queue<T> {
     return false;
   }
 
-  public final static Queue getEmptyInstance() {
+  public static final Queue getEmptyInstance() {
     return EmptyInstance.getInstance();
   }
 
-  private final static Stack reserveStack(Stack stack) {
+  private static final Stack reserveStack(Stack stack) {
     Stack reserveStack = ImmutableStack.getEmptyInstance();
     while (!stack.isEmpty()) {
       reserveStack = reserveStack.push(stack.head());
@@ -54,11 +54,11 @@ public final class ImmutableQueue<T> implements Queue<T> {
     return reserveStack;
   }
 
-  private final static class EmptyInstance<T> implements Queue<T> {
+  private static final class EmptyInstance<T> implements Queue<T> {
 
-    private final static EmptyInstance emptyInstance = new EmptyInstance();
+    private static final EmptyInstance emptyInstance = new EmptyInstance();
 
-    public final static EmptyInstance getInstance() {
+    public static final EmptyInstance getInstance() {
       return emptyInstance;
     }
 
